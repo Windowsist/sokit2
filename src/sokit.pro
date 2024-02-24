@@ -101,7 +101,7 @@ TRANSLATIONS += sokit.ts
 RESOURCES += icons.qrc
 
 QMAKE_PRE_LINK = lupdate $$PWD/sokit.pro
-QMAKE_POST_LINK = lrelease sokit.ts -qm $$DESTDIR/sokit.lan
+QMAKE_POST_LINK = lrelease $$PWD/sokit.ts -qm $$DESTDIR/sokit.lan
 
 win32 {
     RC_FILE = sokit.rc
