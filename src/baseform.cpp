@@ -82,16 +82,16 @@ void BaseForm::initLister(QToolButton* a, QToolButton* k, QListWidget* l)
 	bindFocus(m_cnlist, Qt::Key_F2);
 }
 
-void BaseForm::bindBuffer(qint32 id, QLineEdit* e, QToolButton* s, QComboBox* d)
+void BaseForm::bindBuffer(QLineEdit* e, QToolButton* s, QComboBox* d)
 {
 	s->setProperty(PROP_EDIT, qVariantFromValue((void*)e));
 	s->setProperty(PROP_DIRT, qVariantFromValue((void*)d));
 
 	connect(s, SIGNAL(released()), this, SLOT(send()));
 
-	bindClick(s, Qt::Key_0 + id + Qt::CTRL);
-	bindFocus(e, Qt::Key_0 + id + Qt::ALT);
-	bindFocus(d, Qt::Key_0 + id + Qt::CTRL + Qt::SHIFT);
+    bindClick(s, Qt::Key_Return);
+    bindFocus(e, Qt::Key_E + Qt::CTRL);
+    bindFocus(d, Qt::Key_F + Qt::CTRL);
 }
 
 void BaseForm::bindFocus(QWidget* w, qint32 k)

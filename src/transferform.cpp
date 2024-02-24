@@ -71,7 +71,7 @@ bool TransferForm::initForm()
 	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 	initLister(m_ui.btnConnAll, m_ui.btnConnDel, m_ui.lstConn);
 
-    bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, m_ui.cmbDir1);
+    bindBuffer(m_ui.edtBuf1, m_ui.btnSend1, m_ui.cmbDir1);
 
     bindSelect(m_ui.cmbDir1, -1, Qt::Key_F5);
 
