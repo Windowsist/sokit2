@@ -71,13 +71,9 @@ bool TransferForm::initForm()
 	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 	initLister(m_ui.btnConnAll, m_ui.btnConnDel, m_ui.lstConn);
 
-	bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, m_ui.cmbDir1);
-	bindBuffer(2, m_ui.edtBuf2, m_ui.btnSend2, m_ui.cmbDir2);
-	bindBuffer(3, m_ui.edtBuf3, m_ui.btnSend3, m_ui.cmbDir3);
+    bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, m_ui.cmbDir1);
 
-	bindSelect(m_ui.cmbDir1, -1, Qt::Key_F5);
-	bindSelect(m_ui.cmbDir2, -1, Qt::Key_F6);
-	bindSelect(m_ui.cmbDir3, -1, Qt::Key_F7);
+    bindSelect(m_ui.cmbDir1, -1, Qt::Key_F5);
 
 	connect(m_ui.btnTrigger, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
 

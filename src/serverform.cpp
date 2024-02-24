@@ -70,9 +70,7 @@ bool ServerForm::initForm()
 	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 	initLister(m_ui.btnConnAll, m_ui.btnConnDel, m_ui.lstConn);
 
-	bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, 0);
-	bindBuffer(2, m_ui.edtBuf2, m_ui.btnSend2, 0);
-	bindBuffer(3, m_ui.edtBuf3, m_ui.btnSend3, 0);
+    bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, 0);
 
 	connect(m_ui.btnTcp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
 	connect(m_ui.btnUdp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));

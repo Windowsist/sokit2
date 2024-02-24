@@ -28,10 +28,7 @@ bool ClientForm::initForm()
 	initCounter(m_ui.labRecv, m_ui.labSend);
 	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 
-	bindBuffer(0, m_ui.edtBuf0, m_ui.btnSend0, 0);
-	bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, 0);
-	bindBuffer(2, m_ui.edtBuf2, m_ui.btnSend2, 0);
-	bindBuffer(3, m_ui.edtBuf3, m_ui.btnSend3, 0);
+    bindBuffer(1, m_ui.edtBuf1, m_ui.btnSend1, 0);
 
 	connect(m_ui.btnTcp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
 	connect(m_ui.btnUdp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
