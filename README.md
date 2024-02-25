@@ -8,7 +8,3 @@ Sokit2 has some new functions and more efficient. See <https://github.com/Window
 # License
 
 Sokit is licensed under GNU GPLv3 - see the ``LICENSE`` file.
-
-
-## Version 2.0.0
-
