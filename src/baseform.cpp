@@ -173,7 +173,10 @@ void BaseForm::send()
 	QLineEdit* e = (QLineEdit*)sender()->property(PROP_EDIT).value<void*>();
 	QComboBox* d = (QComboBox*)sender()->property(PROP_DIRT).value<void*>();
 	if (e)
-		send(e->text(), (d?d->currentText():""));
+    {
+        send(e->text(), (d?d->currentText():""));
+        e->clear();
+    }
 }
 
 void BaseForm::clear()
