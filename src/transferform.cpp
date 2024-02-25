@@ -130,6 +130,15 @@ void TransferForm::trigger(bool start)
             {
                 connect(m_server, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
                 connect(m_server, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+                if(m_ui.chkLogLog->isChecked())
+                {
+                    connect(m_server, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+                    connect(m_server, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+                    connect(m_server, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+                    connect(m_server, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+                    connect(m_server, SIGNAL(stopped()), this, SLOT(stop()));
+
+                }
 				start = m_server->start(sa.ip, sa.port, da.ip, da.port);
 				if (!start)
 				{
@@ -190,8 +199,6 @@ void TransferForm::on_chkLogLog_stateChanged(int arg1)
 {
     switch (arg1) {
     case Qt::Checked:
-        connect(m_server, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
-        connect(m_server, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
         connect(m_server, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
         connect(m_server, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
         connect(m_server, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
