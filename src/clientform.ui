@@ -365,6 +365,26 @@
       </spacer>
      </item>
      <item>
+      <widget class="QCheckBox" name="chkLogLog">
+       <property name="text">
+        <string>Enable Log</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkDisplay">
+       <property name="text">
+        <string>Display Log</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QCheckBox" name="chkLog">
        <property name="text">
         <string>Write log</string>

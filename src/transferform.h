@@ -25,6 +25,8 @@ private slots:
 	void trigger(bool start);
 	void stop();
 
+    void on_chkLogLog_stateChanged(int arg1);
+
 private:
 	TransferSkt* m_server;
 	Ui::TransferForm m_ui;

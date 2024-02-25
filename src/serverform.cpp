@@ -67,27 +67,27 @@ void ServerForm::saveConfig()
 bool ServerForm::initForm()
 {
 	initCounter(m_ui.labRecv, m_ui.labSend);
-	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
+    initLogger(m_ui.chkLogLog, m_ui.chkDisplay, m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 	initLister(m_ui.btnConnAll, m_ui.btnConnDel, m_ui.lstConn);
 
     bindBuffer(m_ui.edtBuf1, m_ui.btnSend1, 0);
 
-	connect(m_ui.btnTcp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
-	connect(m_ui.btnUdp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
+    connect(m_ui.btnTcp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
+    connect(m_ui.btnUdp, SIGNAL(clicked(bool)), this, SLOT(trigger(bool)));
 
-	connect(&m_tcp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
-	connect(&m_tcp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
-	connect(&m_tcp, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
-	connect(&m_tcp, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
-	connect(&m_tcp, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
-	connect(&m_tcp, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+    connect(&m_tcp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+    connect(&m_tcp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+    connect(&m_tcp, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+    connect(&m_tcp, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+    connect(&m_tcp, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+    connect(&m_tcp, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
 
-	connect(&m_udp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
-	connect(&m_udp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
-	connect(&m_udp, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
-	connect(&m_udp, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
-	connect(&m_udp, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
-	connect(&m_udp, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+    connect(&m_udp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+    connect(&m_udp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+    connect(&m_udp, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+    connect(&m_udp, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+    connect(&m_udp, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+    connect(&m_udp, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
 
 	return true;
 }
@@ -167,3 +167,39 @@ void ServerForm::send(const QString& data, const QString&)
 		server->send(key, data);
 	}
 }
+
+void ServerForm::on_chkLogLog_stateChanged(int arg1)
+{
+    switch (arg1) {
+    case Qt::Checked:
+        connect(&m_tcp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+        connect(&m_tcp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+        connect(&m_tcp, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+        connect(&m_tcp, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+        connect(&m_tcp, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+        connect(&m_tcp, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+
+        connect(&m_udp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+        connect(&m_udp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+        connect(&m_udp, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+        connect(&m_udp, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+        connect(&m_udp, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+        connect(&m_udp, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+        m_ui.chkDisplay->setDisabled(false);
+        m_ui.chkLog->setDisabled(false);
+        break;
+    case Qt::Unchecked:
+        m_tcp.disconnect(this);
+        connect(&m_tcp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+        connect(&m_tcp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+        m_udp.disconnect(this);
+        connect(&m_udp, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+        connect(&m_udp, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+        m_ui.chkDisplay->setDisabled(true);
+        m_ui.chkLog->setDisabled(true);
+        break;
+    default:
+        break;
+    }
+}
+

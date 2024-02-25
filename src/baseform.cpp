@@ -43,9 +43,9 @@ void BaseForm::initCounter(QLabel* r, QLabel* s)
 	m_labSend = s;
 }
 
-void BaseForm::initLogger(QCheckBox* w, QToolButton* c, QTreeWidget* o, QPlainTextEdit* d)
+void BaseForm::initLogger(QCheckBox* u,QCheckBox* v,QCheckBox* w, QToolButton* c, QTreeWidget* o, QPlainTextEdit* d)
 {
-	m_logger.init(o, w, d);
+    m_logger.init(o, u, v, w, d);
 
 	connect(c, SIGNAL(released()), this, SLOT(clear()));
 	connect(&m_logger, SIGNAL(clearLog()), this, SLOT(clear()));

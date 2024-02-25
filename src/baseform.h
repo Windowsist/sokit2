@@ -24,7 +24,7 @@ protected:
 	void unlock() { m_door.unlock(); };
 
 	void initCounter(QLabel* r, QLabel* s);
-	void initLogger(QCheckBox* w, QToolButton* c, QTreeWidget* o, QPlainTextEdit* d);
+    void initLogger(QCheckBox* u,QCheckBox* v,QCheckBox* w, QToolButton* c, QTreeWidget* o, QPlainTextEdit* d);
 	void initLister(QToolButton* a, QToolButton* k, QListWidget* l);
     void bindBuffer(QLineEdit* e, QToolButton* s, QComboBox* d);
 	void bindFocus(QWidget* w, qint32 k);

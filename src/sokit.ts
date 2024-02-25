@@ -34,12 +34,22 @@
         <translation>UDP 通道</translation>
     </message>
     <message>
-        <location filename="clientform.ui" line="480"/>
+        <location filename="clientform.ui" line="370"/>
+        <source>Enable Log</source>
+        <translation>启用日志</translation>
+    </message>
+    <message>
+        <location filename="clientform.ui" line="380"/>
+        <source>Display Log</source>
+        <translation>显示日志</translation>
+    </message>
+    <message>
+        <location filename="clientform.ui" line="500"/>
         <source>Buf:</source>
         <translation>数据:</translation>
     </message>
     <message>
-        <location filename="clientform.ui" line="515"/>
+        <location filename="clientform.ui" line="535"/>
         <source>Send</source>
         <translation>发送</translation>
     </message>
@@ -59,12 +69,12 @@
         <translation>, 发送</translation>
     </message>
     <message>
-        <location filename="clientform.ui" line="370"/>
+        <location filename="clientform.ui" line="390"/>
         <source>Write log</source>
         <translation>写入日志</translation>
     </message>
     <message>
-        <location filename="clientform.ui" line="389"/>
+        <location filename="clientform.ui" line="409"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
@@ -139,7 +149,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl-V&lt;/span&gt;	paste into current input control&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ctrl-X&lt;/span&gt;	cut&amp;amp;copy selected content in current input control&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; ;  font-weight:400; font-style:normal;&quot;&gt;
@@ -203,17 +213,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>Logger</name>
     <message>
-        <location filename="logger.cpp" line="49"/>
+        <location filename="logger.cpp" line="51"/>
         <source>Copy</source>
         <translation>复制</translation>
     </message>
     <message>
-        <location filename="logger.cpp" line="53"/>
+        <location filename="logger.cpp" line="55"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
     <message>
-        <location filename="logger.cpp" line="57"/>
+        <location filename="logger.cpp" line="59"/>
         <source>Select All</source>
         <translation>全选</translation>
     </message>
@@ -351,12 +361,22 @@ p, li { white-space: pre-wrap; }
         <translation>断开</translation>
     </message>
     <message>
-        <location filename="serverform.ui" line="710"/>
+        <location filename="serverform.ui" line="594"/>
+        <source>Enable Log</source>
+        <translation>启用日志</translation>
+    </message>
+    <message>
+        <location filename="serverform.ui" line="604"/>
+        <source>Display Log</source>
+        <translation>显示日志</translation>
+    </message>
+    <message>
+        <location filename="serverform.ui" line="730"/>
         <source>Buf:</source>
         <translation>数据:</translation>
     </message>
     <message>
-        <location filename="serverform.ui" line="745"/>
+        <location filename="serverform.ui" line="765"/>
         <source>Send</source>
         <translation>发送</translation>
     </message>
@@ -376,7 +396,7 @@ p, li { white-space: pre-wrap; }
         <translation>, 发送</translation>
     </message>
     <message>
-        <location filename="serverform.ui" line="594"/>
+        <location filename="serverform.ui" line="614"/>
         <source>Write log</source>
         <translation>写入日志</translation>
     </message>
@@ -386,7 +406,7 @@ p, li { white-space: pre-wrap; }
         <translation>服务器</translation>
     </message>
     <message>
-        <location filename="serverform.ui" line="613"/>
+        <location filename="serverform.ui" line="633"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
@@ -453,12 +473,22 @@ p, li { white-space: pre-wrap; }
         <translation>断开</translation>
     </message>
     <message>
-        <location filename="transferform.ui" line="717"/>
+        <location filename="transferform.ui" line="601"/>
+        <source>Enable Log</source>
+        <translation>启用日志</translation>
+    </message>
+    <message>
+        <location filename="transferform.ui" line="611"/>
+        <source>Display Log</source>
+        <translation>显示日志</translation>
+    </message>
+    <message>
+        <location filename="transferform.ui" line="737"/>
         <source>Buf:</source>
         <translation>数据:</translation>
     </message>
     <message>
-        <location filename="transferform.ui" line="805"/>
+        <location filename="transferform.ui" line="825"/>
         <source>Send</source>
         <translation>发送</translation>
     </message>
@@ -478,12 +508,12 @@ p, li { white-space: pre-wrap; }
         <translation>, 发送</translation>
     </message>
     <message>
-        <location filename="transferform.ui" line="601"/>
+        <location filename="transferform.ui" line="621"/>
         <source>Write log</source>
         <translation>写入日志</translation>
     </message>
     <message>
-        <location filename="transferform.ui" line="620"/>
+        <location filename="transferform.ui" line="640"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>

@@ -26,7 +26,7 @@ ClientForm::~ClientForm()
 bool ClientForm::initForm()
 {
 	initCounter(m_ui.labRecv, m_ui.labSend);
-	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
+    initLogger(m_ui.chkLogLog, m_ui.chkDisplay, m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 
     bindBuffer(m_ui.edtBuf1, m_ui.btnSend1, 0);
 
@@ -144,13 +144,13 @@ bool ClientForm::plug(bool istcp)
 			res = false;
 		}
 		else
-		{
-			connect(m_client, SIGNAL(unpluged()), this, SLOT(unpluged()));
-			connect(m_client, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
-			connect(m_client, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
-			connect(m_client, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
-			connect(m_client, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
-		
+        {
+            connect(m_client, SIGNAL(unpluged()), this, SLOT(unpluged()));
+            connect(m_client, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+            connect(m_client, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+            connect(m_client, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+            connect(m_client, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+
 			skt = m_client;
 		}
 	}
@@ -177,4 +177,27 @@ void ClientForm::send(const QString& data, const QString&)
 	}
 }
 
+
+
+void ClientForm::on_chkLogLog_stateChanged(int arg1)
+{
+    switch (arg1) {
+    case Qt::Checked:
+        connect(m_client, SIGNAL(unpluged()), this, SLOT(unpluged()));
+        connect(m_client, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+        connect(m_client, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+        connect(m_client, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+        connect(m_client, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+        m_ui.chkDisplay->setDisabled(false);
+        m_ui.chkLog->setDisabled(false);
+        break;
+    case Qt::Unchecked:
+        m_client->disconnect(this);
+        m_ui.chkDisplay->setDisabled(true);
+        m_ui.chkLog->setDisabled(true);
+        break;
+    default:
+        break;
+    }
+}
 

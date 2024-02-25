@@ -28,6 +28,8 @@ private slots:
 	void trigger(bool checked);
 	void unpluged();
 
+    void on_chkLogLog_stateChanged(int arg1);
+
 private:
 	ClientSkt* m_client;
 	Ui::ClientForm m_ui;

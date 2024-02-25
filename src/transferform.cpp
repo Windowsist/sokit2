@@ -68,7 +68,7 @@ void TransferForm::saveConfig()
 bool TransferForm::initForm()
 {
 	initCounter(m_ui.labRecv, m_ui.labSend);
-	initLogger(m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
+    initLogger(m_ui.chkLogLog, m_ui.chkDisplay, m_ui.chkLog, m_ui.btnClear, m_ui.treeOutput, m_ui.txtOutput);
 	initLister(m_ui.btnConnAll, m_ui.btnConnDel, m_ui.lstConn);
 
     bindBuffer(m_ui.edtBuf1, m_ui.btnSend1, m_ui.cmbDir1);
@@ -104,7 +104,7 @@ void TransferForm::trigger(bool start)
 	if (lock(1000))
 	{
 		if (m_server)
-		{
+        {
 			m_server->stop();
 			m_server->disconnect(this);
 			delete m_server;
@@ -127,15 +127,9 @@ void TransferForm::trigger(bool start)
 				m_server = new TransferSktUdp(this);
 
 			if (m_server)
-			{
-				connect(m_server, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
-				connect(m_server, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
-				connect(m_server, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
-				connect(m_server, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
-				connect(m_server, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
-				connect(m_server, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
-				connect(m_server, SIGNAL(stopped()), this, SLOT(stop()));
-				
+            {
+                connect(m_server, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+                connect(m_server, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
 				start = m_server->start(sa.ip, sa.port, da.ip, da.port);
 				if (!start)
 				{
@@ -192,10 +186,29 @@ void TransferForm::send(const QString& data, const QString& dir)
 }
 
 
-
-
-
-
-
-
+void TransferForm::on_chkLogLog_stateChanged(int arg1)
+{
+    switch (arg1) {
+    case Qt::Checked:
+        connect(m_server, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+        connect(m_server, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+        connect(m_server, SIGNAL(message(const QString&)), this, SIGNAL(output(const QString&)));
+        connect(m_server, SIGNAL(dumpbin(const QString&,const char*,quint32)), this, SIGNAL(output(const QString&,const char*,quint32)));
+        connect(m_server, SIGNAL(countRecv(qint32)), this, SLOT(countRecv(qint32)));
+        connect(m_server, SIGNAL(countSend(qint32)), this, SLOT(countSend(qint32)));
+        connect(m_server, SIGNAL(stopped()), this, SLOT(stop()));
+        m_ui.chkDisplay->setDisabled(false);
+        m_ui.chkLog->setDisabled(false);
+        break;
+    case Qt::Unchecked:
+        m_server->disconnect(this);
+        connect(m_server, SIGNAL(connOpen(const QString&)), this, SLOT(listerAdd(const QString&)));
+        connect(m_server, SIGNAL(connClose(const QString&)), this, SLOT(listerRemove(const QString&)));
+        m_ui.chkDisplay->setDisabled(true);
+        m_ui.chkLog->setDisabled(true);
+        break;
+    default:
+        break;
+    }
+}
 

@@ -30,8 +30,10 @@ void TK::initNetworkInterfaces(QComboBox* box, bool testDef)
 	QList<QHostAddress> lst = QNetworkInterface::allAddresses();
 	foreach (QHostAddress a, lst)
 	{
-		if (QAbstractSocket::IPv4Protocol == a.protocol())
+        if (QAbstractSocket::IPv4Protocol == a.protocol())
 			pushComboBox(box, a.toString());
+        if (QAbstractSocket::IPv6Protocol == a.protocol())
+            pushComboBox(box, a.toString());
 	}
 
 	if (!def.isEmpty() && (-1 != box->findText(def)))

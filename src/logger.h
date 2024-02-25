@@ -17,7 +17,7 @@ public:
 	Logger(QObject *parent = 0);
 	~Logger();
 
-	void init(QTreeWidget* o, QCheckBox* w, QPlainTextEdit* d);
+    void init(QTreeWidget* o, QCheckBox* u, QCheckBox* v, QCheckBox* w, QPlainTextEdit* d);
 
 	void clear();
 	void output(const QString& title, const QString& info);
@@ -46,6 +46,8 @@ private:
 	QFile m_file;
 
 	QMenu m_cmlog, m_cmtxt;
+    QCheckBox* m_chkLog;
+    QCheckBox* m_chkDisplay;
     QCheckBox* m_chkWrite;
     QTreeWidget* m_treeOut;
     QPlainTextEdit* m_textOut;

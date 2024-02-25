@@ -24,6 +24,8 @@ protected:
 private slots:
 	void trigger(bool start);
 
+    void on_chkLogLog_stateChanged(int arg1);
+
 private:
 	ServerSktTcp m_tcp;
 	ServerSktUdp m_udp;

@@ -14,7 +14,7 @@
 #define SET_MAX_LOGTRM  30
 
 Logger::Logger(QObject *parent)
-: QObject(parent),m_chkWrite(0),m_treeOut(0),m_textOut(0)
+    : QObject(parent),m_chkLog(0),m_chkDisplay(0),m_chkWrite(0),m_treeOut(0),m_textOut(0)
 {
 }
 
@@ -23,7 +23,7 @@ Logger::~Logger()
 	m_file.close();
 }
 
-void Logger::init(QTreeWidget* o, QCheckBox* w, QPlainTextEdit* d)
+void Logger::init(QTreeWidget* o, QCheckBox* u, QCheckBox* v, QCheckBox* w, QPlainTextEdit* d)
 {
 	m_cmlog.clear();
 	m_cmtxt.clear();
@@ -39,6 +39,8 @@ void Logger::init(QTreeWidget* o, QCheckBox* w, QPlainTextEdit* d)
 
     m_treeOut = o;
 	m_textOut = d;
+    m_chkLog = u;
+    m_chkDisplay = v;
     m_chkWrite = w;
 
 	if (m_treeOut && m_textOut && m_chkWrite)
@@ -133,9 +135,6 @@ const QString Logger::getLogFileName()
 
 void Logger::writeLogFile(const QString& info)
 {
-	if (!m_chkWrite->isChecked())
-		return;
-
 	m_file.close();
 	m_file.setFileName(getLogFileName());
 
@@ -204,6 +203,9 @@ QTreeWidgetItem* Logger::appendLogEntry(QTreeWidgetItem* p, const QString& t)
 
 void Logger::output(const QString& title, const QString& info)
 {
+    if(!m_chkLog->isChecked())
+        return;
+
 	QTreeWidgetItem* it = new QTreeWidgetItem(0);
 	if (!it) return;
 
@@ -212,19 +214,25 @@ void Logger::output(const QString& title, const QString& info)
 	lab += title;
 	lab += ' ';
 	lab += info;
+    if(m_chkDisplay->isChecked())
+    {
+        appendLogEntry(0, lab);
 
-	appendLogEntry(0, lab);
-
-	pack();
+        pack();
+    }
 
 	lab += '\n';
 	lab += '\n';
 
-	writeLogFile(lab);
+    if (m_chkWrite->isChecked())
+        writeLogFile(lab);
 }
 
 void Logger::output(const QString& title, const char* buf, quint32 len)
 {
+    if(!m_chkLog->isChecked())
+        return;
+
 	QString lab(QTime::currentTime().toString("HH:mm:ss "));
 	
 	QTextStream out(&lab);
@@ -234,16 +242,18 @@ void Logger::output(const QString& title, const char* buf, quint32 len)
 		<< TK::bin2ascii(buf, len);
 
 	QString hex = TK::bin2hex(buf, len);
+    if(m_chkDisplay->isChecked())
+    {
+        QTreeWidgetItem* it = appendLogEntry(0, lab);
+        if (it)
+        {
+            appendLogEntry(it, hex);
 
-	QTreeWidgetItem* it = appendLogEntry(0, lab);
-	if (it)
-	{
-		appendLogEntry(it, hex);
-
-		pack();
-	}
-
+            pack();
+        }
+    }
 	out << '\n' << hex << '\n' << '\n';
 
-	writeLogFile(lab);
+    if (m_chkWrite->isChecked())
+        writeLogFile(lab);
 }
